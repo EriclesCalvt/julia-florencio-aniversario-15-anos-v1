@@ -27,12 +27,14 @@
    DESIGN TOKENS
 ═══════════════════════════════════════════════ */
 :root {
-  --vinho:        #57162A;
-  --vinho-claro:  #7A2138;
+  --rosa:         #D88A9A;
+  --rosa-claro:   #F0C3CE;
+  --rosa-escura:  #B85C72;
+  --vinho:        #7A2138;
   --ambar:        #C8923E;
   --ambar-claro:  #E0B36C;
   --champanhe:    #F1E6CC;
-  --meia-noite:   #11142B;
+  --crepusculo:   #2A1B35;
   --azul-poeira:  #4C5F78;
   --carvao:       #1A130F;
   --texto-suave:  rgba(241,230,204,0.6);
@@ -53,7 +55,7 @@
 html { font-size: 16px; -webkit-text-size-adjust: 100%; }
 
 body {
-  background: var(--meia-noite);
+  background: var(--crepusculo);
   color: var(--champanhe);
   font-family: 'Jost', system-ui, sans-serif;
   font-weight: 400;
@@ -86,13 +88,13 @@ a { text-decoration: none; color: inherit; }
    ATMOSFERA — luz de vela (background de todas as cenas)
 ═══════════════════════════════════════════════ */
 .cena {
-  background-color: var(--meia-noite);
+  background-color: var(--crepusculo);
   background-image:
     radial-gradient(ellipse 35% 50% at 8% 95%,  rgba(200,146,62,0.20) 0%, transparent 65%),
     radial-gradient(ellipse 35% 50% at 92% 95%, rgba(200,146,62,0.20) 0%, transparent 65%),
     radial-gradient(ellipse 70% 40% at 50% 105%, rgba(200,146,62,0.15) 0%, transparent 70%),
     radial-gradient(ellipse 80% 35% at 50% -5%,  rgba(76,95,120,0.22) 0%, transparent 70%),
-    radial-gradient(ellipse 110% 110% at 50% 50%, transparent 40%, rgba(17,20,43,0.8) 100%);
+    radial-gradient(ellipse 110% 110% at 50% 50%, transparent 40%, rgba(42,27,53,0.8) 100%);
   /* NOTE: no position: relative here — [data-screen]'s position: fixed must not be overridden.
      Ambient petals inside convite are absolute children of a fixed parent, which is valid. */
 }
@@ -104,7 +106,7 @@ a { text-decoration: none; color: inherit; }
 #overlay-transicao {
   position: fixed;
   inset: 0;
-  background: var(--meia-noite);
+  background: var(--crepusculo);
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.3s ease;
@@ -119,7 +121,7 @@ a { text-decoration: none; color: inherit; }
   bottom: 40px;
   left: 50%;
   transform: translateX(-50%) translateY(16px);
-  background: var(--azul-poeira);
+  background: var(--rosa-escura);
   border: 0.5px solid rgba(200,146,62,0.4);
   color: var(--champanhe);
   padding: 12px 20px;
@@ -201,8 +203,8 @@ a { text-decoration: none; color: inherit; }
 .selo-container:hover { transform: scale(1.03); }
 .selo-container:focus-visible { outline: 2px solid rgba(200,146,62,0.5); outline-offset: 6px; border-radius: 50%; }
 
-/* Tamanho: interativo (abertura) */
-.selo-container.interativo { width: 140px; height: 140px; }
+/* Tamanho: interativo (abertura — lacre no envelope) */
+.selo-container.interativo { width: 56px; height: 56px; }
 
 /* Tamanho: decorativo convite */
 .selo-convite { width: 64px; height: 64px; }
@@ -236,7 +238,7 @@ a { text-decoration: none; color: inherit; }
   position: absolute;
   top: 50%; left: 50%;
   width: 7px; height: 10px;
-  background: var(--vinho-claro);
+  background: var(--vinho);
   border-radius: 50% 0 50% 0;
   opacity: 0;
   pointer-events: none;
@@ -251,7 +253,7 @@ a { text-decoration: none; color: inherit; }
   position: absolute;
   bottom: -10px;
   width: 6px; height: 9px;
-  background: var(--vinho);
+  background: var(--rosa);
   border-radius: 50% 0 50% 0;
   opacity: 0;
   pointer-events: none;
@@ -285,6 +287,82 @@ a { text-decoration: none; color: inherit; }
   margin-top: 18px;
 }
 
+/* Candelabros + Envelope */
+.cena-envelope-flanqueada {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+}
+
+.candelabro { width: 50px; height: 85px; opacity: 0.55; flex-shrink: 0; pointer-events: none; }
+.candelabro-dir { transform: scaleX(-1); }
+
+@media (max-width: 380px) {
+  .candelabro { width: 36px; height: 62px; }
+}
+@media (max-width: 350px) {
+  .candelabro { display: none; }
+}
+
+.envelope-scene { perspective: 1200px; flex-shrink: 0; }
+
+.envelope {
+  position: relative;
+  width: 250px;
+  height: 165px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.envelope:focus-visible { outline: 2px solid rgba(200,146,62,0.5); outline-offset: 6px; border-radius: 10px; }
+
+.envelope-body {
+  position: absolute; inset: 0;
+  background: linear-gradient(155deg, var(--rosa-claro) 0%, var(--champanhe) 100%);
+  border: 1px solid rgba(200,146,62,0.45);
+  border-radius: 10px;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.4);
+}
+
+.letter {
+  position: absolute; left: 9px; right: 9px; top: 9px; bottom: 9px;
+  background: #FBF7EE;
+  border-radius: 6px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+  display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 4px;
+  z-index: 2;
+  transition: transform 1.1s cubic-bezier(0.22,1,0.36,1) 0.55s;
+}
+.carta-nome { font-family: 'Italiana', Georgia, serif; font-size: 1.2rem; color: var(--vinho); margin: 0; }
+.carta-anos { font-family: 'Jost', sans-serif; font-weight: 500; font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ambar); margin: 0; }
+
+.envelope.aberto .letter { transform: translateY(-138px) scale(1.04); }
+
+.envelope-flap {
+  position: absolute; top: 0; left: 0; width: 100%; height: 82px;
+  background: linear-gradient(155deg, var(--rosa) 0%, var(--rosa-escura) 100%);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  transform-origin: top center;
+  transition: transform 0.85s cubic-bezier(0.65,0,0.35,1) 0s, z-index 0s 0.85s;
+  z-index: 3;
+  display: flex; justify-content: center; align-items: flex-end; padding-bottom: 6px;
+  border-radius: 10px 10px 0 0;
+}
+.envelope.aberto .envelope-flap { transform: rotateX(180deg); z-index: 1; }
+
+.petala-envelope {
+  position: absolute; top: 10px; left: 50%; width: 7px; height: 10px;
+  background: var(--rosa); border-radius: 50% 0 50% 0; opacity: 0; pointer-events: none; z-index: 4;
+}
+.envelope.aberto .petala-envelope { animation: subirPetalaEnvelope 1.3s ease-out forwards; }
+
+@keyframes subirPetalaEnvelope {
+  0%   { opacity: 0; transform: translate(-50%, 0) rotate(0deg); }
+  15%  { opacity: 0.9; }
+  100% { opacity: 0; transform: translate(-50%, -150px) rotate(200deg) translateX(var(--dx)); }
+}
+
 
 /* ═══════════════════════════════════════════════
    TELA 1 — CONVITE (principal)
@@ -293,17 +371,17 @@ a { text-decoration: none; color: inherit; }
   align-items: center;
 }
 
-/* Vitral decorativo — roseta procedural atrás do conteúdo */
+/* Vitral decorativo — roseta na tela convite */
 .vitral {
   position: absolute;
-  top: -4%;
+  top: -50px;
   left: 50%;
   transform: translateX(-50%);
-  width: min(88vw, 370px);
-  height: auto;
-  opacity: 0.055;
-  pointer-events: none;
+  width: min(360px, 90vw);
+  height: min(360px, 90vw);
+  opacity: 0.5;
   z-index: 0;
+  pointer-events: none;
 }
 
 .convite-inner {
@@ -340,8 +418,8 @@ a { text-decoration: none; color: inherit; }
   letter-spacing: 0.02em;
   padding: 0.1em 0;
   background: linear-gradient(100deg,
-    var(--vinho) 0%, var(--ambar) 30%, var(--ambar-claro) 45%,
-    #ffffff 50%, var(--ambar-claro) 55%, var(--ambar) 70%, var(--vinho) 100%);
+    var(--rosa-escura) 0%, var(--ambar) 30%, var(--ambar-claro) 45%,
+    #ffffff 50%, var(--ambar-claro) 55%, var(--ambar) 70%, var(--rosa-escura) 100%);
   background-size: 250% auto;
   -webkit-background-clip: text; background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -370,42 +448,22 @@ a { text-decoration: none; color: inherit; }
   margin-top: 22px;
 }
 
-/* Arco gótico — wrapper com arco SVG ao redor do bloco de data */
-.arco-data-wrap {
-  position: relative;
-  width: 100%;
-  margin-top: 26px;
-  display: flex;
-  justify-content: center;
-}
-.arco-gotico {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 162px;
-  overflow: visible;
-  pointer-events: none;
-}
-.arco-linha {
-  fill: none;
-  stroke: var(--ambar);
-  stroke-width: 0.75;
-  opacity: 0.22;
-}
-.arco-data-wrap .convite-data-bloco {
-  margin-top: 0;
-  position: relative;
-  z-index: 1;
-  padding: 8px 0;
-}
-
-/* Bloco de data */
+/* Bloco de data com arco gótico interno */
 .convite-data-bloco {
+  position: relative;
   text-align: center;
   width: 100%;
   margin-top: 26px;
+  padding: 30px 26px 14px;
 }
+.arco-svg {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+.arco-conteudo { position: relative; z-index: 1; }
 .data-numero {
   font-family: 'Italiana', Georgia, serif;
   font-size: var(--fs-data);
@@ -509,7 +567,7 @@ a { text-decoration: none; color: inherit; }
   top: 0;
   z-index: 100;
   padding: 20px 24px 16px;
-  background: linear-gradient(to bottom, rgba(17,20,43,0.95) 70%, transparent);
+  background: linear-gradient(to bottom, rgba(42,27,53,0.95) 70%, transparent);
   display: flex;
   align-items: center;
   gap: 12px;
@@ -824,6 +882,7 @@ a { text-decoration: none; color: inherit; }
 @media (prefers-reduced-motion: reduce) {
   .selo-container.idle,
   .petala-ambiente,
+  .petala-envelope,
   .nome-shimmer { animation: none !important; }
 
   .nome-shimmer {

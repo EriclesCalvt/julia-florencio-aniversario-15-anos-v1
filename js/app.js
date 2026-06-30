@@ -63,56 +63,68 @@ function criarPetalasSelo(container) {
 
 
 /* ═══════════════════════════════════════════════
-   ABERTURA DO SELO
+   ABERTURA DO ENVELOPE
 ═══════════════════════════════════════════════ */
-function abrirSelo(seloEl) {
-  if (seloEl.classList.contains('iniciando')) return;
+function abrirEnvelope() {
+  var envelope = document.getElementById('envelope');
+  var selo = document.getElementById('selo-abertura');
+  if (!envelope || !selo) return;
+  if (envelope.classList.contains('aberto') || selo.classList.contains('iniciando')) return;
 
   if (reducedMotion) {
     navigate('convite');
     return;
   }
 
-  seloEl.classList.remove('idle');
-  seloEl.classList.add('iniciando');
+  selo.classList.remove('idle');
+  selo.classList.add('iniciando');
 
   // === NARRAÇÃO / SOM — descomentar quando os arquivos existirem ===
   // var somRachadura = new Audio('./assets/audio/cera-rachando.mp3');
   // somRachadura.play();
   // var narracao = new Audio('./assets/audio/narracao.mp3');
-  // setTimeout(function() { narracao.play(); }, TIMELINE.iniciando + TIMELINE.rachando);
+  // setTimeout(function() { narracao.play(); }, 850);
   // ================================================================
 
+  setTimeout(function() { selo.classList.add('rachando'); }, 250);
   setTimeout(function() {
-    seloEl.classList.add('rachando');
-  }, TIMELINE.iniciando);
+    selo.classList.add('abrindo');
+    envelope.classList.add('aberto');
+  }, 850);
 
-  setTimeout(function() {
-    seloEl.classList.add('abrindo');
-  }, TIMELINE.iniciando + TIMELINE.rachando);
-
-  var telaConvite = document.querySelector('[data-screen="convite"]');
+  var T_LEITURA = 850 + 550 + 1100 + 2200;
+  var T_REVELANDO = 500;
 
   setTimeout(function() {
     if (!overlay) overlay = document.getElementById('overlay-transicao');
     overlay.style.opacity = '1';
-  }, TIMELINE.iniciando + TIMELINE.rachando + TIMELINE.abrindo);
+  }, T_LEITURA);
 
   setTimeout(function() {
-    document.querySelectorAll('[data-screen]').forEach(function(s) {
-      s.classList.remove('active');
-    });
+    document.querySelectorAll('[data-screen]').forEach(function(s) { s.classList.remove('active'); });
+    var telaConvite = document.querySelector('[data-screen="convite"]');
     if (telaConvite) {
       _resetAnimacoes(telaConvite);
       telaConvite.classList.add('active');
     }
     window.scrollTo(0, 0);
-
     setTimeout(function() {
       if (!overlay) overlay = document.getElementById('overlay-transicao');
       overlay.style.opacity = '0';
     }, 100);
-  }, TIMELINE.iniciando + TIMELINE.rachando + TIMELINE.abrindo + TIMELINE.revelando);
+  }, T_LEITURA + T_REVELANDO);
+}
+
+function criarPetalasEnvelope(envelopeEl) {
+  var deslocamentos = [-40, 20, 50, -15, 35];
+  var posicoes = ['30%', '50%', '70%', '42%', '60%'];
+  deslocamentos.forEach(function(dx, i) {
+    var p = document.createElement('div');
+    p.className = 'petala-envelope';
+    p.style.left = posicoes[i];
+    p.style.setProperty('--dx', dx + 'px');
+    envelopeEl.appendChild(p);
+  });
 }
 
 
@@ -146,68 +158,44 @@ function initPetalasAmbiente() {
 
 
 /* ═══════════════════════════════════════════════
-   VITRAL — roseta procedural na tela convite
+   VITRAL — roseta na tela convite
 ═══════════════════════════════════════════════ */
 function initVitral() {
-  var convite = document.querySelector('[data-screen="convite"]');
-  if (!convite) return;
+  var svgNS = 'http://www.w3.org/2000/svg';
+  var rw = document.getElementById('vitral-convite');
+  if (!rw) return;
 
-  var NS = 'http://www.w3.org/2000/svg';
-  var svg = document.createElementNS(NS, 'svg');
-  svg.setAttribute('class', 'vitral');
-  svg.setAttribute('id', 'vitral-convite');
-  svg.setAttribute('viewBox', '0 0 400 400');
-  svg.setAttribute('aria-hidden', 'true');
+  var cx = 150, cy = 150, innerR = 28, outerR = 145, spokes = 12;
 
-  var cx = 200, cy = 200;
-  var N = 12;
-  var TAU = Math.PI * 2;
+  for (var i = 0; i < spokes; i++) {
+    var a = (i * 360 / spokes) * Math.PI / 180;
+    var x1 = cx + innerR * Math.cos(a), y1 = cy + innerR * Math.sin(a);
+    var x2 = cx + outerR * Math.cos(a), y2 = cy + outerR * Math.sin(a);
+    var line = document.createElementNS(svgNS, 'line');
+    line.setAttribute('x1', x1); line.setAttribute('y1', y1);
+    line.setAttribute('x2', x2); line.setAttribute('y2', y2);
+    line.setAttribute('stroke', '#C8923E'); line.setAttribute('stroke-width', '0.7'); line.setAttribute('opacity', '0.3');
+    rw.appendChild(line);
 
-  // 12 raios
-  for (var i = 0; i < N; i++) {
-    var ang = (i / N) * TAU;
-    var line = document.createElementNS(NS, 'line');
-    line.setAttribute('x1', (cx + 22 * Math.cos(ang)).toFixed(2));
-    line.setAttribute('y1', (cy + 22 * Math.sin(ang)).toFixed(2));
-    line.setAttribute('x2', (cx + 190 * Math.cos(ang)).toFixed(2));
-    line.setAttribute('y2', (cy + 190 * Math.sin(ang)).toFixed(2));
-    line.setAttribute('stroke', '#C8923E');
-    line.setAttribute('stroke-width', '0.6');
-    svg.appendChild(line);
+    var ma = ((i + 0.5) * 360 / spokes) * Math.PI / 180;
+    var pr = (innerR + outerR) / 2 + 24;
+    var px = cx + pr * Math.cos(ma), py = cy + pr * Math.sin(ma);
+    var petal = document.createElementNS(svgNS, 'ellipse');
+    petal.setAttribute('cx', px); petal.setAttribute('cy', py);
+    petal.setAttribute('rx', 10); petal.setAttribute('ry', 22);
+    petal.setAttribute('transform', 'rotate(' + ((i + 0.5) * 30 + 90) + ' ' + px + ' ' + py + ')');
+    petal.setAttribute('fill', 'none'); petal.setAttribute('stroke', '#E0B36C');
+    petal.setAttribute('stroke-width', '0.8'); petal.setAttribute('opacity', '0.4');
+    rw.appendChild(petal);
   }
 
-  // 12 pétalas entre os raios
-  for (var i = 0; i < N; i++) {
-    var midAng = ((i + 0.5) / N) * TAU;
-    var midAngDeg = ((i + 0.5) / N) * 360;
-    var r = 112;
-    var px = cx + r * Math.cos(midAng);
-    var py = cy + r * Math.sin(midAng);
-    var el = document.createElementNS(NS, 'ellipse');
-    el.setAttribute('cx', px.toFixed(2));
-    el.setAttribute('cy', py.toFixed(2));
-    el.setAttribute('rx', '20');
-    el.setAttribute('ry', '54');
-    el.setAttribute('fill', 'none');
-    el.setAttribute('stroke', '#C8923E');
-    el.setAttribute('stroke-width', '0.5');
-    el.setAttribute('transform', 'rotate(' + (midAngDeg + 90).toFixed(2) + ',' + px.toFixed(2) + ',' + py.toFixed(2) + ')');
-    svg.appendChild(el);
-  }
-
-  // 4 anéis concêntricos
-  [50, 94, 140, 182].forEach(function(r) {
-    var c = document.createElementNS(NS, 'circle');
-    c.setAttribute('cx', cx);
-    c.setAttribute('cy', cy);
-    c.setAttribute('r', r);
-    c.setAttribute('fill', 'none');
-    c.setAttribute('stroke', '#C8923E');
-    c.setAttribute('stroke-width', '0.5');
-    svg.appendChild(c);
+  [44, 88, 128, 145].forEach(function(r) {
+    var c = document.createElementNS(svgNS, 'circle');
+    c.setAttribute('cx', cx); c.setAttribute('cy', cy); c.setAttribute('r', r);
+    c.setAttribute('fill', 'none'); c.setAttribute('stroke', '#C8923E');
+    c.setAttribute('stroke-width', '0.5'); c.setAttribute('opacity', '0.22');
+    rw.appendChild(c);
   });
-
-  convite.insertBefore(svg, convite.firstChild);
 }
 
 
@@ -225,7 +213,7 @@ function initMiniSelos() {
     + '<ellipse cx="0" cy="-14" rx="9" ry="14" fill="#F1E6CC" opacity="0.9" transform="rotate(144)"/>'
     + '<ellipse cx="0" cy="-14" rx="9" ry="14" fill="#F1E6CC" opacity="0.9" transform="rotate(216)"/>'
     + '<ellipse cx="0" cy="-14" rx="9" ry="14" fill="#F1E6CC" opacity="0.9" transform="rotate(288)"/>'
-    + '<circle cx="0" cy="0" r="5" fill="#57162A"/>'
+    + '<circle cx="0" cy="0" r="5" fill="#7A2138"/>'
     + '</g>'
     + '<text x="100" y="135" text-anchor="middle" font-family="Italiana,Georgia,serif" font-size="24" fill="#F1E6CC">XV</text>'
     + '</svg>';
@@ -278,35 +266,25 @@ function showToast(msg) {
 document.addEventListener('DOMContentLoaded', function() {
   overlay = document.getElementById('overlay-transicao');
 
-  // Injetar selos miniatura nos sub-headers
   initMiniSelos();
-
-  // Pétalas ambiente no convite
   initPetalasAmbiente();
-
-  // Vitral decorativo
   initVitral();
 
-  // Pétalas de explosão no container do selo interativo
-  var seloAbertura = document.getElementById('selo-abertura');
-  if (seloAbertura) {
-    criarPetalasSelo(seloAbertura);
+  var envelope = document.getElementById('envelope');
+  if (envelope) {
+    criarPetalasEnvelope(envelope);
+    var seloAbertura = document.getElementById('selo-abertura');
+    if (seloAbertura) criarPetalasSelo(seloAbertura);
 
-    // Clique
-    seloAbertura.addEventListener('click', function() {
-      abrirSelo(seloAbertura);
-    });
-
-    // Teclado (Enter / Espaço)
-    seloAbertura.addEventListener('keydown', function(e) {
+    envelope.addEventListener('click', abrirEnvelope);
+    envelope.addEventListener('keydown', function(e) {
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
-        abrirSelo(seloAbertura);
+        abrirEnvelope();
       }
     });
   }
 
-  // Menu do convite — delegação por data-goto
   document.querySelectorAll('.menu-item[data-goto]').forEach(function(btn) {
     btn.addEventListener('click', function() {
       navigate(this.dataset.goto);
