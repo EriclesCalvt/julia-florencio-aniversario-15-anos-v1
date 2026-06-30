@@ -293,6 +293,19 @@ a { text-decoration: none; color: inherit; }
   align-items: center;
 }
 
+/* Vitral decorativo — roseta procedural atrás do conteúdo */
+.vitral {
+  position: absolute;
+  top: -4%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(88vw, 370px);
+  height: auto;
+  opacity: 0.055;
+  pointer-events: none;
+  z-index: 0;
+}
+
 .convite-inner {
   position: relative;
   z-index: 1;
@@ -355,6 +368,36 @@ a { text-decoration: none; color: inherit; }
   text-align: center;
   line-height: 1.7;
   margin-top: 22px;
+}
+
+/* Arco gótico — wrapper com arco SVG ao redor do bloco de data */
+.arco-data-wrap {
+  position: relative;
+  width: 100%;
+  margin-top: 26px;
+  display: flex;
+  justify-content: center;
+}
+.arco-gotico {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 162px;
+  overflow: visible;
+  pointer-events: none;
+}
+.arco-linha {
+  fill: none;
+  stroke: var(--ambar);
+  stroke-width: 0.75;
+  opacity: 0.22;
+}
+.arco-data-wrap .convite-data-bloco {
+  margin-top: 0;
+  position: relative;
+  z-index: 1;
+  padding: 8px 0;
 }
 
 /* Bloco de data */

@@ -146,6 +146,72 @@ function initPetalasAmbiente() {
 
 
 /* ═══════════════════════════════════════════════
+   VITRAL — roseta procedural na tela convite
+═══════════════════════════════════════════════ */
+function initVitral() {
+  var convite = document.querySelector('[data-screen="convite"]');
+  if (!convite) return;
+
+  var NS = 'http://www.w3.org/2000/svg';
+  var svg = document.createElementNS(NS, 'svg');
+  svg.setAttribute('class', 'vitral');
+  svg.setAttribute('id', 'vitral-convite');
+  svg.setAttribute('viewBox', '0 0 400 400');
+  svg.setAttribute('aria-hidden', 'true');
+
+  var cx = 200, cy = 200;
+  var N = 12;
+  var TAU = Math.PI * 2;
+
+  // 12 raios
+  for (var i = 0; i < N; i++) {
+    var ang = (i / N) * TAU;
+    var line = document.createElementNS(NS, 'line');
+    line.setAttribute('x1', (cx + 22 * Math.cos(ang)).toFixed(2));
+    line.setAttribute('y1', (cy + 22 * Math.sin(ang)).toFixed(2));
+    line.setAttribute('x2', (cx + 190 * Math.cos(ang)).toFixed(2));
+    line.setAttribute('y2', (cy + 190 * Math.sin(ang)).toFixed(2));
+    line.setAttribute('stroke', '#C8923E');
+    line.setAttribute('stroke-width', '0.6');
+    svg.appendChild(line);
+  }
+
+  // 12 pétalas entre os raios
+  for (var i = 0; i < N; i++) {
+    var midAng = ((i + 0.5) / N) * TAU;
+    var midAngDeg = ((i + 0.5) / N) * 360;
+    var r = 112;
+    var px = cx + r * Math.cos(midAng);
+    var py = cy + r * Math.sin(midAng);
+    var el = document.createElementNS(NS, 'ellipse');
+    el.setAttribute('cx', px.toFixed(2));
+    el.setAttribute('cy', py.toFixed(2));
+    el.setAttribute('rx', '20');
+    el.setAttribute('ry', '54');
+    el.setAttribute('fill', 'none');
+    el.setAttribute('stroke', '#C8923E');
+    el.setAttribute('stroke-width', '0.5');
+    el.setAttribute('transform', 'rotate(' + (midAngDeg + 90).toFixed(2) + ',' + px.toFixed(2) + ',' + py.toFixed(2) + ')');
+    svg.appendChild(el);
+  }
+
+  // 4 anéis concêntricos
+  [50, 94, 140, 182].forEach(function(r) {
+    var c = document.createElementNS(NS, 'circle');
+    c.setAttribute('cx', cx);
+    c.setAttribute('cy', cy);
+    c.setAttribute('r', r);
+    c.setAttribute('fill', 'none');
+    c.setAttribute('stroke', '#C8923E');
+    c.setAttribute('stroke-width', '0.5');
+    svg.appendChild(c);
+  });
+
+  convite.insertBefore(svg, convite.firstChild);
+}
+
+
+/* ═══════════════════════════════════════════════
    SELOS MINIATURA NOS SUB-HEADERS
 ═══════════════════════════════════════════════ */
 function initMiniSelos() {
@@ -217,6 +283,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Pétalas ambiente no convite
   initPetalasAmbiente();
+
+  // Vitral decorativo
+  initVitral();
 
   // Pétalas de explosão no container do selo interativo
   var seloAbertura = document.getElementById('selo-abertura');
