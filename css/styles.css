@@ -1,63 +1,62 @@
-/* ═══════════════════════════════════════════
-   FONTES
-═══════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════
+   FONTES — auto-hospedadas, sem CDN
+═══════════════════════════════════════════════ */
 @font-face {
-  font-family: 'BeautyoftheBeast';
-  src: url('../assets/fonts/BeautyoftheBeast.ttf') format('truetype');
-  font-weight: normal; font-style: normal; font-display: swap;
+  font-family: 'Italiana';
+  src: url('../assets/fonts/Italiana-Regular.woff2') format('woff2');
+  font-weight: 400; font-style: normal; font-display: swap;
 }
 @font-face {
-  font-family: 'RocGrotesk';
-  src: url('../assets/fonts/RocGrotesk-Thin.otf') format('opentype');
-  font-weight: 100; font-display: swap;
+  font-family: 'CormorantGaramond';
+  src: url('../assets/fonts/CormorantGaramond-Regular.woff2') format('woff2');
+  font-weight: 400; font-style: normal; font-display: swap;
 }
 @font-face {
-  font-family: 'RocGrotesk';
-  src: url('../assets/fonts/RocGrotesk-ExtraLight.otf') format('opentype');
-  font-weight: 200; font-display: swap;
+  font-family: 'CormorantGaramond';
+  src: url('../assets/fonts/CormorantGaramond-Italic.woff2') format('woff2');
+  font-weight: 400; font-style: italic; font-display: swap;
 }
+/* Jost é variable font — uma entrada cobre todos os pesos */
 @font-face {
-  font-family: 'RocGrotesk';
-  src: url('../assets/fonts/RocGrotesk-Light.otf') format('opentype');
-  font-weight: 300; font-display: swap;
-}
-@font-face {
-  font-family: 'RocGrotesk';
-  src: url('../assets/fonts/RocGrotesk-Regular.otf') format('opentype');
-  font-weight: 400; font-display: swap;
-}
-@font-face {
-  font-family: 'RocGrotesk';
-  src: url('../assets/fonts/RocGrotesk-Medium.otf') format('opentype');
-  font-weight: 500; font-display: swap;
-}
-@font-face {
-  font-family: 'RocGrotesk';
-  src: url('../assets/fonts/RocGrotesk-Bold.otf') format('opentype');
-  font-weight: 700; font-display: swap;
-}
-@font-face {
-  font-family: 'RocGrotesk';
-  src: url('../assets/fonts/RocGrotesk-ExtraBold.otf') format('opentype');
-  font-weight: 800; font-display: swap;
-}
-@font-face {
-  font-family: 'RocGrotesk';
-  src: url('../assets/fonts/RocGrotesk-Black.otf') format('opentype');
-  font-weight: 900; font-display: swap;
+  font-family: 'Jost';
+  src: url('../assets/fonts/Jost-VF.woff2') format('woff2');
+  font-weight: 100 900; font-style: normal; font-display: swap;
 }
 
-/* ═══════════════════════════════════════════
+/* ═══════════════════════════════════════════════
+   DESIGN TOKENS
+═══════════════════════════════════════════════ */
+:root {
+  --vinho:        #57162A;
+  --vinho-claro:  #7A2138;
+  --ambar:        #C8923E;
+  --ambar-claro:  #E0B36C;
+  --champanhe:    #F1E6CC;
+  --meia-noite:   #11142B;
+  --azul-poeira:  #4C5F78;
+  --carvao:       #1A130F;
+  --texto-suave:  rgba(241,230,204,0.6);
+
+  --fs-hero:    clamp(2.6rem, 8vw, 3.4rem);
+  --fs-display: clamp(1.5rem, 5vw, 2rem);
+  --fs-data:    clamp(2.8rem, 8vw, 3.8rem);
+  --fs-body:    0.92rem;
+  --fs-caption: 0.7rem;
+  --fs-label:   0.64rem;
+}
+
+/* ═══════════════════════════════════════════════
    RESET & BASE
-═══════════════════════════════════════════ */
+═══════════════════════════════════════════════ */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 html { font-size: 16px; -webkit-text-size-adjust: 100%; }
 
 body {
-  background: #01061c;
-  color: #fff;
-  font-family: 'RocGrotesk', sans-serif;
+  background: var(--meia-noite);
+  color: var(--champanhe);
+  font-family: 'Jost', system-ui, sans-serif;
+  font-weight: 400;
   overflow-x: hidden;
   max-width: 480px;
   margin: 0 auto;
@@ -65,558 +64,508 @@ body {
 }
 
 img { max-width: 100%; display: block; }
-button { cursor: pointer; font-family: 'RocGrotesk', sans-serif; }
+button { cursor: pointer; font-family: 'Jost', system-ui, sans-serif; }
 ul { list-style: none; }
-a { text-decoration: none; }
+a { text-decoration: none; color: inherit; }
 
-/* ═══════════════════════════════════════════
-   DESIGN TOKENS
-═══════════════════════════════════════════ */
-:root {
-  --ouro:          #eeba40;
-  --ouro-claro:    #f5d98a;
-  --ouro-escuro:   #b8882a;
-  --vermelho:      #fe2831;
-  --azul-profundo: #2d4665;
-  --azul-medio:    #55779c;
-  --noite:         #01061c;
-  --noite-medio:   #060d26;
-  --branco-quente: #f0ead6;
-  --cinza-suave:   rgba(240, 234, 214, 0.55);
-
-  --fs-hero:    clamp(2.8rem, 8vw, 3.6rem);
-  --fs-display: clamp(1.6rem, 5vw, 2.2rem);
-  --fs-data:    clamp(3.2rem, 9vw, 4.5rem);
-  --fs-body:    0.95rem;
-  --fs-caption: 0.72rem;
-  --fs-label:   0.65rem;
-}
-
-/* ═══════════════════════════════════════════
-   ANIMAÇÕES
-═══════════════════════════════════════════ */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(16px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50%       { transform: translateY(-8px); }
-}
-@keyframes floatMirror {
-  0%, 100% { transform: scaleX(-1) translateY(0); }
-  50%       { transform: scaleX(-1) translateY(-8px); }
-}
-@keyframes shimmer {
-  0%   { background-position: 200% center; }
-  100% { background-position: -200% center; }
-}
-@keyframes petalFall {
-  0%   { opacity: 0; transform: translateY(0) rotate(0deg); }
-  10%  { opacity: 0.35; }
-  90%  { opacity: 0.2; }
-  100% { opacity: 0; transform: translateY(-110vh) rotate(360deg); }
-}
-@keyframes roseAppear {
-  from { opacity: 0; transform: scale(0.4) rotate(-15deg); }
-  to   { opacity: 0.7; transform: scale(1) rotate(0deg); }
-}
-
-.float-3  { animation: float 3s ease-in-out infinite; }
-.float-4  { animation: float 4s ease-in-out infinite; }
-.float-35 { animation: float 3.5s ease-in-out infinite; }
-
-/* ═══════════════════════════════════════════
-   SPA — TELAS
-═══════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════
+   SPA — GESTÃO DE TELAS
+═══════════════════════════════════════════════ */
 [data-screen] {
-  display: none;
-  min-height: 100dvh;
-  width: 100%;
-  overflow-x: hidden;
-}
-[data-screen].active          { display: block; }
-[data-screen="intro"].active  { display: flex; }
-
-/* ═══════════════════════════════════════════
-   OVERLAY DE TRANSIÇÃO
-═══════════════════════════════════════════ */
-#transition-overlay {
   position: fixed;
   inset: 0;
-  background: var(--noite);
+  display: none;
+  flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+[data-screen].active { display: flex; }
+
+/* ═══════════════════════════════════════════════
+   ATMOSFERA — luz de vela (background de todas as cenas)
+═══════════════════════════════════════════════ */
+.cena {
+  background-color: var(--meia-noite);
+  background-image:
+    radial-gradient(ellipse 35% 50% at 8% 95%,  rgba(200,146,62,0.20) 0%, transparent 65%),
+    radial-gradient(ellipse 35% 50% at 92% 95%, rgba(200,146,62,0.20) 0%, transparent 65%),
+    radial-gradient(ellipse 70% 40% at 50% 105%, rgba(200,146,62,0.15) 0%, transparent 70%),
+    radial-gradient(ellipse 80% 35% at 50% -5%,  rgba(76,95,120,0.22) 0%, transparent 70%),
+    radial-gradient(ellipse 110% 110% at 50% 50%, transparent 40%, rgba(17,20,43,0.8) 100%);
+  /* NOTE: no position: relative here — [data-screen]'s position: fixed must not be overridden.
+     Ambient petals inside convite are absolute children of a fixed parent, which is valid. */
+}
+.cena--quente { background-color: var(--carvao); }
+
+/* ═══════════════════════════════════════════════
+   OVERLAY DE TRANSIÇÃO
+═══════════════════════════════════════════════ */
+#overlay-transicao {
+  position: fixed;
+  inset: 0;
+  background: var(--meia-noite);
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.3s ease;
   z-index: 9998;
 }
 
-/* ═══════════════════════════════════════════
-   TELA 0 — OVERTURE (vídeo)
-═══════════════════════════════════════════ */
-[data-screen="intro"] {
-  background: var(--noite);
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
-}
-
-#intro-video {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  z-index: 1;
-}
-
-.rose-wrap {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  pointer-events: none;
-}
-.rose-intro {
-  width: 48px;
-  height: 48px;
-  background: radial-gradient(circle, var(--vermelho) 30%, #8b0000 100%);
-  border-radius: 50% 30% 50% 30% / 30% 50% 30% 50%;
-  filter: drop-shadow(0 0 20px rgba(254,40,49,0.6)) drop-shadow(0 0 60px rgba(238,186,64,0.3));
-  animation: roseAppear 1.5s ease forwards;
-}
-
-.progress-bar {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  height: 1px;
-  background: var(--ouro);
-  width: 0%;
-  z-index: 3;
-  pointer-events: none;
-}
-
-.btn-pular {
-  position: absolute;
-  bottom: 24px;
-  right: 24px;
-  z-index: 4;
-  background: none;
-  border: none;
-  color: var(--ouro);
-  font-family: 'RocGrotesk', sans-serif;
-  font-weight: 300;
-  font-size: 0.75rem;
-  letter-spacing: 0.04em;
+/* ═══════════════════════════════════════════════
+   TOAST
+═══════════════════════════════════════════════ */
+.toast {
+  position: fixed;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%) translateY(16px);
+  background: var(--azul-poeira);
+  border: 0.5px solid rgba(200,146,62,0.4);
+  color: var(--champanhe);
+  padding: 12px 20px;
+  border-radius: 4px;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.82rem;
   opacity: 0;
-  padding: 8px;
-  transition: opacity 0.5s ease;
+  transition: all 0.3s ease;
+  z-index: 9999;
+  white-space: nowrap;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  pointer-events: none;
 }
-.btn-pular.visible { opacity: 0.6; }
-.btn-pular:focus-visible { outline: 1px solid var(--ouro); opacity: 1; }
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-/* ═══════════════════════════════════════════
-   TELA 1 — O CONVITE
-   Atmosfera: luz de vela + luar + BG.png
-═══════════════════════════════════════════ */
-.convite-cena {
-  min-height: 100dvh;
+
+/* ═══════════════════════════════════════════════
+   ANIMAÇÕES GLOBAIS
+═══════════════════════════════════════════════ */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+
+@keyframes respirarSelo {
+  0%, 100% { filter: drop-shadow(0 0 8px rgba(200,146,62,0.25)); }
+  50%       { filter: drop-shadow(0 0 18px rgba(200,146,62,0.45)); }
+}
+
+@keyframes desenharRachadura { to { stroke-dashoffset: 0; } }
+
+@keyframes dissolverSelo {
+  to {
+    opacity: 0;
+    transform: scale(1.18);
+    filter: drop-shadow(0 0 30px rgba(224,179,108,0.6));
+  }
+}
+
+@keyframes explodirPetala {
+  0%   { opacity: 0; }
+  15%  { opacity: 0.95; }
+  100% { opacity: 0; transform: translate(-50%,-50%) rotate(var(--ang)) translateY(calc(var(--dist) * -1)); }
+}
+
+@keyframes cairPetala {
+  0%   { opacity: 0; transform: translateY(0) rotate(0deg); }
+  10%  { opacity: 0.3; }
+  90%  { opacity: 0.15; }
+  100% { opacity: 0; transform: translateY(-70vh) rotate(360deg); }
+}
+
+
+/* ═══════════════════════════════════════════════
+   O SELO DE CERA
+═══════════════════════════════════════════════ */
+
+/* SVG herda tamanho do container */
+.selo-svg { width: 100%; height: 100%; overflow: visible; }
+
+/* Transform-origin correto para SVG elements */
+.selo-forma, .selo-rosa, .selo-xv {
+  transform-box: fill-box;
+  transform-origin: center center;
+}
+
+/* Container base */
+.selo-container {
   position: relative;
-  overflow: hidden;
-  background-image:
-    radial-gradient(ellipse 35% 50% at 8%  95%,  rgba(238,186,64,0.22) 0%, transparent 65%),
-    radial-gradient(ellipse 35% 50% at 92% 95%,  rgba(238,186,64,0.22) 0%, transparent 65%),
-    radial-gradient(ellipse 70% 40% at 50% 105%, rgba(238,186,64,0.18) 0%, transparent 70%),
-    radial-gradient(ellipse 80% 35% at 50% -5%,  rgba(85,119,156,0.25) 0%, transparent 70%),
-    radial-gradient(ellipse 110% 110% at 50% 50%, transparent 40%, rgba(1,6,28,0.75) 100%),
-    url('../assets/img/BG.png');
-  background-size: auto, auto, auto, auto, auto, cover;
-  background-position: center, center, center, center, center, center top;
-  background-color: var(--noite);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.selo-container:hover { transform: scale(1.03); }
+.selo-container:focus-visible { outline: 2px solid rgba(200,146,62,0.5); outline-offset: 6px; border-radius: 50%; }
+
+/* Tamanho: interativo (abertura) */
+.selo-container.interativo { width: 140px; height: 140px; }
+
+/* Tamanho: decorativo convite */
+.selo-convite { width: 64px; height: 64px; }
+
+/* Tamanho: miniatura sub-header */
+.selo-mini { width: 28px; height: 28px; }
+
+/* Estado repouso — pulsação suave */
+.selo-container.idle { animation: respirarSelo 3.2s ease-in-out infinite; }
+
+/* Fase 1: press */
+.selo-container.iniciando .selo-forma {
+  transform: scale(0.96);
+  transition: transform 0.15s ease;
 }
 
-/* Pétalas */
-.petala {
+/* Fase 2: rachadura se desenha */
+.selo-container.rachando .selo-rachadura {
+  animation: desenharRachadura 0.6s ease-out forwards;
+}
+
+/* Fase 3: dissolve */
+.selo-container.abrindo .selo-forma,
+.selo-container.abrindo .selo-rosa,
+.selo-container.abrindo .selo-xv {
+  animation: dissolverSelo 0.9s ease-in forwards;
+}
+
+/* Pétalas de explosão — posicionadas no centro do container pelo JS */
+.petala-selo {
   position: absolute;
-  width: 6px;
-  height: 9px;
-  background: var(--vermelho);
+  top: 50%; left: 50%;
+  width: 7px; height: 10px;
+  background: var(--vinho-claro);
   border-radius: 50% 0 50% 0;
   opacity: 0;
-  animation: petalFall linear infinite;
   pointer-events: none;
-  z-index: 2;
-  bottom: -20px;
+  transform: translate(-50%,-50%) rotate(var(--ang));
 }
-.p1 { left: 15%; animation-duration: 9s;  animation-delay: 0s;  }
-.p2 { left: 35%; animation-duration: 12s; animation-delay: 2s;  }
-.p3 { left: 55%; animation-duration: 8s;  animation-delay: 4s;  }
-.p4 { left: 70%; animation-duration: 11s; animation-delay: 1s;  }
-.p5 { left: 25%; animation-duration: 10s; animation-delay: 6s;  }
-.p6 { left: 80%; animation-duration: 13s; animation-delay: 3s;  }
-
-/* Candelabros de cena */
-.cena-candelabro {
-  position: absolute;
-  bottom: 0;
-  height: 38vh;
-  max-height: 300px;
-  width: auto;
-  opacity: 0.85;
-  pointer-events: none;
-}
-.cena-candelabro--esq {
-  left: -10px;
-  z-index: 3;
-  animation: float 3s ease-in-out infinite;
-}
-.cena-candelabro--dir {
-  right: -10px;
-  z-index: 4;
-  transform: scaleX(-1);
-  animation: floatMirror 3s ease-in-out infinite;
+.selo-container.abrindo .petala-selo {
+  animation: explodirPetala 0.9s ease-out forwards;
 }
 
-/* Bule e relógio */
-.cena-bule {
+/* Pétalas de fundo — ambiente na tela convite */
+.petala-ambiente {
   position: absolute;
-  bottom: 60px;
-  left: 16px;
-  height: 80px;
-  width: auto;
-  opacity: 0.7;
-  z-index: 6;
+  bottom: -10px;
+  width: 6px; height: 9px;
+  background: var(--vinho);
+  border-radius: 50% 0 50% 0;
+  opacity: 0;
   pointer-events: none;
-}
-.cena-relogio {
-  position: absolute;
-  bottom: 55px;
-  right: 16px;
-  height: 85px;
-  width: auto;
-  opacity: 0.7;
-  z-index: 7;
-  pointer-events: none;
+  animation: cairPetala linear infinite;
+  z-index: 0;
 }
 
-/* Conteúdo central */
-.convite-conteudo {
+
+/* ═══════════════════════════════════════════════
+   TELA 0 — ABERTURA
+═══════════════════════════════════════════════ */
+[data-screen="abertura"] {
+  justify-content: center;
+  align-items: center;
+}
+
+.abertura-centro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+.abertura-hint {
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  font-size: var(--fs-caption);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--texto-suave);
+  margin-top: 18px;
+}
+
+
+/* ═══════════════════════════════════════════════
+   TELA 1 — CONVITE (principal)
+═══════════════════════════════════════════════ */
+[data-screen="convite"] {
+  align-items: center;
+}
+
+.convite-inner {
   position: relative;
-  z-index: 5;
+  z-index: 1;
   width: 100%;
   max-width: 420px;
-  margin: 0 auto;
-  padding: max(8vh, 48px) 24px max(14vh, 120px);
+  padding: max(6vh, 36px) 28px max(10vh, 80px);
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-/* Monograma */
-.convite-monograma {
-  width: 72px;
-  height: auto;
-  opacity: 0.9;
-  filter: drop-shadow(0 0 12px rgba(238,186,64,0.4));
-  display: block;
-  margin: 0 auto 16px;
+/* Linha dourada — separador delicado */
+.linha-dourada {
+  width: 50px;
+  height: 0.5px;
+  background: var(--ambar);
+  opacity: 0.35;
+  margin: 14px auto;
+}
+/* No sub-content a linha dourada tem espaçamento diferente */
+.sub-content .linha-dourada {
+  margin: 10px 0 22px;
 }
 
-/* Linha ornamental */
-.linha-ornamental {
-  width: 60px;
-  height: 1px;
-  background: var(--ouro);
-  opacity: 0.4;
-  margin: 0 auto 20px;
-}
-.linha-ornamental--sub {
-  width: 40px;
-  opacity: 0.3;
-  margin-bottom: 24px;
-}
-
-/* Nome + shimmer (SOMENTE AQUI) */
-.convite-nome {
-  font-family: 'BeautyoftheBeast', cursive;
-  font-size: var(--fs-hero);
-  text-align: center;
-  line-height: 1.4;
-  padding: 0.1em 0;
-  letter-spacing: 0.01em;
-  margin-bottom: 4px;
-}
+/* Nome: único uso do shimmer — APENAS aqui */
 .nome-shimmer {
-  background: linear-gradient(
-    100deg,
-    var(--ouro-escuro) 0%,
-    var(--ouro)        30%,
-    var(--ouro-claro)  45%,
-    #ffffff            50%,
-    var(--ouro-claro)  55%,
-    var(--ouro)        70%,
-    var(--ouro-escuro) 100%
-  );
+  font-family: 'Italiana', Georgia, serif;
+  font-size: var(--fs-hero);
+  font-weight: 400;
+  text-align: center;
+  line-height: 1.1;
+  letter-spacing: 0.02em;
+  padding: 0.1em 0;
+  background: linear-gradient(100deg,
+    var(--vinho) 0%, var(--ambar) 30%, var(--ambar-claro) 45%,
+    #ffffff 50%, var(--ambar-claro) 55%, var(--ambar) 70%, var(--vinho) 100%);
   background-size: 250% auto;
-  -webkit-background-clip: text;
+  -webkit-background-clip: text; background-clip: text;
   -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation: shimmer 4s ease-in-out infinite;
+  animation: shimmer 4.5s ease-in-out infinite;
 }
 
-/* 15 anos */
-.convite-anos {
-  font-family: 'RocGrotesk', sans-serif;
-  font-weight: 900;
+.convite-xv-label {
+  font-family: 'Jost', sans-serif;
+  font-weight: 600;
   font-size: var(--fs-label);
-  color: var(--ouro);
+  color: var(--ambar);
   text-transform: uppercase;
-  letter-spacing: 0.28em;
+  letter-spacing: 0.24em;
   text-align: center;
-  margin-bottom: 24px;
+  margin-top: 6px;
 }
 
-/* Tagline */
+/* Tagline poética */
 .convite-tagline {
-  font-family: 'RocGrotesk', sans-serif;
-  font-weight: 300;
+  font-family: 'CormorantGaramond', Georgia, serif;
   font-style: italic;
-  font-size: 0.88rem;
-  color: var(--cinza-suave);
-  line-height: 1.7;
+  font-size: var(--fs-body);
+  color: var(--texto-suave);
   text-align: center;
-  padding: 0 32px;
-  margin-bottom: 28px;
+  line-height: 1.7;
+  margin-top: 22px;
 }
 
-/* Bloco data */
-.convite-data {
+/* Bloco de data */
+.convite-data-bloco {
   text-align: center;
-  margin-bottom: 32px;
+  width: 100%;
+  margin-top: 26px;
 }
 .data-numero {
-  font-family: 'BeautyoftheBeast', cursive;
+  font-family: 'Italiana', Georgia, serif;
   font-size: var(--fs-data);
-  color: var(--ouro-claro);
+  color: var(--ambar-claro);
   line-height: 1;
   margin-bottom: 4px;
 }
-.data-mes-ano {
-  font-family: 'RocGrotesk', sans-serif;
-  font-weight: 200;
+.data-mes {
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
   font-size: 0.62rem;
   text-transform: uppercase;
-  letter-spacing: 0.22em;
-  color: var(--cinza-suave);
+  letter-spacing: 0.2em;
+  color: var(--texto-suave);
   margin-bottom: 12px;
 }
-.data-divisor {
-  width: 80px;
+.data-separador {
+  width: 70px;
   height: 0.5px;
-  background: var(--ouro);
+  background: var(--ambar);
   opacity: 0.35;
   margin: 0 auto 12px;
 }
-.data-dia-hora {
-  font-family: 'RocGrotesk', sans-serif;
-  font-weight: 300;
-  font-size: 0.78rem;
+.data-hora {
+  font-family: 'Jost', sans-serif;
+  font-weight: 400;
+  font-size: 0.76rem;
   text-transform: uppercase;
-  letter-spacing: 0.16em;
-  color: #fff;
+  letter-spacing: 0.14em;
+  color: var(--champanhe);
 }
 
-/* Menu editorial — grid 2×2 */
+/* Menu editorial — lista vertical */
 .menu-convite {
   width: 100%;
   max-width: 340px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
+  margin: 30px auto 0;
 }
 .menu-item {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 18px 12px;
-  border: 0.5px solid rgba(238,186,64,0.18);
-  border-radius: 4px;
-  background: rgba(238,186,64,0.03);
+  gap: 14px;
+  padding: 15px 0;
+  border: none;
+  border-bottom: 0.5px solid rgba(200,146,62,0.18);
+  background: none;
+  color: inherit;
+  text-align: left;
   width: 100%;
   cursor: pointer;
-  transition: background 0.25s, border-color 0.25s;
+  transition: all 0.25s ease;
   -webkit-tap-highlight-color: transparent;
 }
-.menu-item:hover,
-.menu-item:active {
-  background: rgba(238,186,64,0.07);
-  border-color: rgba(238,186,64,0.38);
-}
-.menu-item:focus-visible {
-  outline: 1px solid rgba(238,186,64,0.5);
-  outline-offset: 2px;
-}
+.menu-item:last-child { border-bottom: none; }
+.menu-item:focus-visible { outline: 1px solid rgba(200,146,62,0.4); outline-offset: 2px; }
+
 .menu-icone {
-  color: var(--ouro);
-  font-size: 0.85rem;
-  opacity: 0.75;
+  color: var(--ambar);
+  font-size: 0.75rem;
+  opacity: 0.8;
+  width: 16px;
+  text-align: center;
+  flex-shrink: 0;
 }
 .menu-texto {
-  font-family: 'RocGrotesk', sans-serif;
+  flex: 1;
+  font-family: 'Jost', sans-serif;
   font-weight: 400;
-  font-size: 0.78rem;
-  color: var(--branco-quente);
+  font-size: 0.9rem;
+  color: var(--champanhe);
   letter-spacing: 0.04em;
-  text-align: center;
-  line-height: 1.3;
-  transition: color 0.25s;
+  transition: color 0.2s;
 }
+.menu-seta {
+  color: var(--ambar);
+  font-size: 0.85rem;
+  opacity: 0.5;
+  transition: all 0.2s;
+}
+.menu-item:hover .menu-seta,
+.menu-item:active .menu-seta { opacity: 1; transform: translateX(4px); }
 .menu-item:hover .menu-texto,
 .menu-item:active .menu-texto { color: #fff; }
-.menu-seta { display: none; }
 
-/* Stagger de entrada (convite) */
+/* Animação de entrada com stagger via CSS custom property */
 .entrada {
   opacity: 0;
   transform: translateY(16px);
 }
 [data-screen="convite"].active .entrada {
   animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-[data-screen="convite"].active .e1 { animation-delay: 0.10s; }
-[data-screen="convite"].active .e2 { animation-delay: 0.25s; }
-[data-screen="convite"].active .e3 { animation-delay: 0.40s; }
-[data-screen="convite"].active .e4 { animation-delay: 0.55s; }
-[data-screen="convite"].active .e5 { animation-delay: 0.70s; }
-
-/* ═══════════════════════════════════════════
-   SUB-PÁGINAS — base compartilhada
-═══════════════════════════════════════════ */
-.subpage-cena {
-  min-height: 100dvh;
-  background-image:
-    radial-gradient(ellipse 35% 50% at 8%  95%,  rgba(238,186,64,0.13) 0%, transparent 65%),
-    radial-gradient(ellipse 35% 50% at 92% 95%,  rgba(238,186,64,0.13) 0%, transparent 65%),
-    radial-gradient(ellipse 70% 40% at 50% 105%, rgba(238,186,64,0.11) 0%, transparent 70%),
-    radial-gradient(ellipse 80% 35% at 50% -5%,  rgba(85,119,156,0.15) 0%, transparent 70%),
-    radial-gradient(ellipse 110% 110% at 50% 50%, transparent 40%, rgba(1,6,28,0.6) 100%);
-  background-color: var(--noite);
+  animation-delay: var(--delay, 0s);
 }
 
+
+/* ═══════════════════════════════════════════════
+   SUB-HEADER — compartilhado pelas telas 2–5
+═══════════════════════════════════════════════ */
 .sub-header {
   position: sticky;
   top: 0;
   z-index: 100;
   padding: 20px 24px 16px;
-  background: linear-gradient(to bottom, rgba(1,6,28,0.95) 70%, transparent);
+  background: linear-gradient(to bottom, rgba(17,20,43,0.95) 70%, transparent);
   display: flex;
   align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
 }
+
+/* Para cena--quente: overlay com carvao */
+[data-screen="local"] .sub-header,
+[data-screen="presentes"] .sub-header {
+  background: linear-gradient(to bottom, rgba(26,19,15,0.95) 70%, transparent);
+}
+
 .btn-voltar {
   background: none;
   border: none;
   cursor: pointer;
-  color: var(--ouro);
-  font-family: 'RocGrotesk', sans-serif;
+  color: var(--ambar);
+  font-family: 'Jost', sans-serif;
   font-size: 0.82rem;
   letter-spacing: 0.06em;
-  opacity: 0.8;
+  opacity: 0.85;
   transition: opacity 0.2s;
-  display: flex;
-  align-items: center;
-  gap: 6px;
   padding: 0;
 }
 .btn-voltar:hover { opacity: 1; }
-.btn-voltar:focus-visible { outline: 1px solid rgba(238,186,64,0.4); opacity: 1; }
+.btn-voltar:focus-visible { outline: 1px solid rgba(200,146,62,0.4); opacity: 1; outline-offset: 4px; }
 
-.sub-inner {
-  padding: 0 24px 56px;
+
+/* ═══════════════════════════════════════════════
+   SUB-CONTENT — wrapper compartilhado
+═══════════════════════════════════════════════ */
+.sub-content {
+  padding: 0 24px 60px;
   max-width: 420px;
+  width: 100%;
   margin: 0 auto;
-  position: relative;
 }
 
 .sub-label {
-  font-family: 'RocGrotesk', sans-serif;
-  font-weight: 900;
+  font-family: 'Jost', sans-serif;
+  font-weight: 600;
   font-size: var(--fs-label);
-  letter-spacing: 0.2em;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--ouro);
+  color: var(--ambar);
   opacity: 0.7;
   margin-bottom: 8px;
 }
-.sub-title {
-  font-family: 'BeautyoftheBeast', cursive;
+
+.sub-titulo {
+  font-family: 'Italiana', Georgia, serif;
   font-size: var(--fs-display);
+  font-weight: 400;
   color: #fff;
   line-height: 1.15;
   margin-bottom: 12px;
 }
-.sub-deco {
-  display: block;
-  width: 56px;
-  height: auto;
-  margin: 0 auto 14px;
-}
 
-/* ═══════════════════════════════════════════
+
+/* ═══════════════════════════════════════════════
    TELA 2 — LOCAL DA FESTA
-═══════════════════════════════════════════ */
-.local-candelabro {
-  position: absolute;
-  top: -8px;
-  right: -8px;
-  height: 40px;
-  width: auto;
-  opacity: 0.45;
-  pointer-events: none;
-}
-.local-rua {
-  font-family: 'RocGrotesk', sans-serif;
+═══════════════════════════════════════════════ */
+.local-ende {
+  font-family: 'Jost', sans-serif;
   font-weight: 400;
   font-size: 0.9rem;
-  color: #fff;
+  color: var(--champanhe);
   margin-bottom: 4px;
 }
 .local-bairro {
-  font-family: 'RocGrotesk', sans-serif;
+  font-family: 'Jost', sans-serif;
   font-weight: 300;
   font-size: 0.8rem;
-  color: var(--cinza-suave);
+  color: var(--texto-suave);
   margin-bottom: 20px;
 }
-.mapa-wrap {
+
+.local-mapa {
   width: 100%;
-  border: 0.5px solid rgba(238,186,64,0.35);
+  border: 0.5px solid rgba(200,146,62,0.35);
   border-radius: 6px;
   overflow: hidden;
   margin-bottom: 20px;
-  filter: saturate(0.5) brightness(0.7);
+  filter: saturate(0.5) brightness(0.75);
 }
-.mapa-wrap iframe {
+.local-mapa iframe {
   width: 100%;
   height: 230px;
   border: none;
   display: block;
 }
+
 .btn-outlined {
   display: block;
   width: 100%;
   background: transparent;
-  border: 0.5px solid var(--ouro);
-  color: var(--ouro);
-  font-family: 'RocGrotesk', sans-serif;
+  border: 0.5px solid var(--ambar);
+  color: var(--ambar);
+  font-family: 'Jost', sans-serif;
   font-weight: 500;
   font-size: 0.85rem;
   text-transform: uppercase;
@@ -624,42 +573,45 @@ a { text-decoration: none; }
   text-align: center;
   padding: 14px;
   border-radius: 4px;
-  transition: background 0.2s;
   cursor: pointer;
+  transition: background 0.2s;
 }
-.btn-outlined:hover  { background: rgba(238,186,64,0.08); }
-.btn-outlined:focus-visible { outline: 1px solid var(--ouro); outline-offset: 2px; }
+.btn-outlined:hover { background: rgba(200,146,62,0.08); }
+.btn-outlined:focus-visible { outline: 1px solid var(--ambar); outline-offset: 3px; }
 
-/* ═══════════════════════════════════════════
+
+/* ═══════════════════════════════════════════════
    TELA 3 — CONFIRMAR PRESENÇA
-═══════════════════════════════════════════ */
+═══════════════════════════════════════════════ */
+.presenca-titulo { margin-bottom: 12px; }
+
 .form-presenca {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 28px;
 }
-.form-group {
+.form-grupo {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 .form-label {
-  font-family: 'RocGrotesk', sans-serif;
+  font-family: 'Jost', sans-serif;
   font-weight: 300;
   font-size: 0.65rem;
   text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--ouro);
-  opacity: 0.7;
+  letter-spacing: 0.22em;
+  color: var(--ambar);
+  opacity: 0.75;
 }
 .form-input {
   width: 100%;
   background: transparent;
   border: none;
-  border-bottom: 0.5px solid rgba(238,186,64,0.4);
-  color: #fff;
-  font-family: 'RocGrotesk', sans-serif;
+  border-bottom: 0.5px solid rgba(200,146,62,0.4);
+  color: var(--champanhe);
+  font-family: 'Jost', sans-serif;
   font-weight: 400;
   font-size: 0.95rem;
   padding: 12px 0;
@@ -669,22 +621,26 @@ a { text-decoration: none; }
   appearance: none;
   border-radius: 0;
 }
-.form-input:focus { border-bottom-color: var(--ouro); }
+.form-input::placeholder { color: rgba(241,230,204,0.3); }
+.form-input:focus { border-bottom-color: var(--ambar); }
+
 .form-select {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23eeba40'/%3E%3C/svg%3E");
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23C8923E'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 4px center;
   background-color: transparent;
-  cursor: pointer;
+  padding-right: 24px;
 }
-.form-select option { background: #1a2a3d; color: #fff; }
-.btn-primario {
+.form-select option { background: #1a2235; color: var(--champanhe); }
+
+.btn-cheio {
   display: block;
   width: 100%;
-  background: var(--vermelho);
-  color: #fff;
-  font-family: 'RocGrotesk', sans-serif;
-  font-weight: 700;
+  background: var(--vinho);
+  color: var(--champanhe);
+  font-family: 'Jost', sans-serif;
+  font-weight: 500;
   font-size: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -696,34 +652,26 @@ a { text-decoration: none; }
   transition: filter 0.2s, transform 0.1s;
   margin-top: 4px;
 }
-.btn-primario:hover  { filter: brightness(1.1); }
-.btn-primario:active { transform: scale(0.98); }
-.btn-primario:focus-visible { outline: 2px solid var(--ouro); outline-offset: 3px; }
+.btn-cheio:hover  { filter: brightness(1.12); }
+.btn-cheio:active { transform: scale(0.98); }
+.btn-cheio:focus-visible { outline: 2px solid var(--ambar); outline-offset: 3px; }
 
-/* ═══════════════════════════════════════════
+
+/* ═══════════════════════════════════════════════
    TELA 4 — SUGESTÕES DE PRESENTE
-═══════════════════════════════════════════ */
-.presentes-bule {
-  position: absolute;
-  top: -8px;
-  right: 0;
-  width: 60px;
-  height: auto;
-  opacity: 0.7;
-  pointer-events: none;
-}
-.presentes-lista {
-  width: 100%;
-  padding: 0;
-}
+═══════════════════════════════════════════════ */
+.lista-presentes { width: 100%; }
+
 .presente-item {
-  border-left: 2px solid rgba(238,186,64,0.5);
+  border-left: 2px solid rgba(200,146,62,0.5);
   padding: 13px 0 13px 14px;
-  font-family: 'RocGrotesk', sans-serif;
+  font-family: 'Jost', sans-serif;
   font-weight: 400;
   font-size: 0.92rem;
-  color: var(--branco-quente);
-  border-bottom: 0.5px solid rgba(238,186,64,0.1);
+  color: var(--champanhe);
+  border-bottom: 0.5px solid rgba(200,146,62,0.1);
+  opacity: 0;
+  transform: translateY(10px);
 }
 .presente-item:last-child { border-bottom: none; }
 
@@ -737,114 +685,107 @@ a { text-decoration: none; }
 [data-screen="presentes"].active .presente-item:nth-child(5) { animation-delay: 0.40s; }
 [data-screen="presentes"].active .presente-item:nth-child(6) { animation-delay: 0.48s; }
 
-/* ═══════════════════════════════════════════
-   TELA 5 — DRESS CODE
-═══════════════════════════════════════════ */
-.dresscode-relogio { width: 80px; }
-.dresscode-card {
-  width: 100%;
-  border: 1px solid rgba(238,186,64,0.35);
-  box-shadow: inset 0 0 0 1px rgba(238,186,64,0.08);
-  border-radius: 4px;
-  padding: 28px 24px;
-  margin-bottom: 24px;
+
+/* ═══════════════════════════════════════════════
+   TELA 5 — DRESS CODE (layout editorial)
+═══════════════════════════════════════════════ */
+.dresscode-content { padding-bottom: 60px; }
+
+/* Foto como herói */
+.dresscode-foto-wrap {
+  margin: 4px -4px 0;  /* sangra levemente as margens */
   text-align: center;
 }
-.dresscode-label-inner {
-  font-family: 'RocGrotesk', sans-serif;
-  font-weight: 300;
-  font-size: 0.7rem;
-  color: rgba(255,255,255,0.45);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  margin-bottom: 12px;
-}
-.dresscode-traje {
-  font-family: 'BeautyoftheBeast', cursive;
-  font-size: 2.2rem;
-  color: var(--ouro-claro);
-  margin-bottom: 16px;
-  letter-spacing: 0.02em;
-}
-.dresscode-desc {
-  font-family: 'RocGrotesk', sans-serif;
-  font-weight: 300;
-  font-size: 0.85rem;
-  color: var(--cinza-suave);
-  line-height: 1.65;
-}
-.dresscode-julia {
+.dresscode-foto {
   display: block;
-  max-height: 160px;
+  max-height: 280px;
   width: auto;
+  max-width: 100%;
   margin: 0 auto;
   object-fit: contain;
-  opacity: 0.8;
-  filter: drop-shadow(0 0 20px rgba(238,186,64,0.2));
+  filter:
+    drop-shadow(0 0 20px rgba(200,146,62,0.40))
+    drop-shadow(0 0 60px rgba(200,146,62,0.18));
 }
 
-/* ═══════════════════════════════════════════
-   TOAST
-═══════════════════════════════════════════ */
-.toast {
-  position: fixed;
-  bottom: 40px;
-  left: 50%;
-  transform: translateX(-50%) translateY(16px);
-  background: var(--azul-profundo);
-  border: 0.5px solid rgba(238,186,64,0.4);
-  color: var(--branco-quente);
-  padding: 12px 20px;
-  border-radius: 4px;
-  font-family: 'RocGrotesk', sans-serif;
-  font-size: 0.82rem;
-  letter-spacing: 0.04em;
-  opacity: 0;
-  transition: all 0.3s ease;
-  z-index: 9999;
-  white-space: nowrap;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
-  pointer-events: none;
+/* Separador ornamental ── ◈ ── */
+.dresscode-ornamento {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 28px 0 24px;
 }
-.toast.show {
-  opacity: 1;
-  transform: translateX(-50%) translateY(0);
+.dresscode-orn-linha {
+  flex: 1;
+  height: 0.5px;
+  background: var(--ambar);
+  opacity: 0.28;
+}
+.dresscode-orn-icone {
+  color: var(--ambar);
+  font-size: 0.72rem;
+  opacity: 0.55;
+  flex-shrink: 0;
 }
 
-/* ═══════════════════════════════════════════
+/* Bloco de texto — aberto, centrado */
+.dresscode-info { text-align: center; }
+
+.dresscode-traje-label {
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  font-size: var(--fs-label);
+  color: rgba(241,230,204,0.45);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  margin-bottom: 10px;
+}
+.dresscode-titulo {
+  font-family: 'Italiana', Georgia, serif;
+  font-size: clamp(2rem, 7vw, 2.6rem);
+  font-weight: 400;
+  color: var(--ambar-claro);
+  margin-bottom: 14px;
+  letter-spacing: 0.02em;
+  line-height: 1;
+}
+.dresscode-desc {
+  font-family: 'CormorantGaramond', Georgia, serif;
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--texto-suave);
+  line-height: 1.75;
+}
+
+
+/* ═══════════════════════════════════════════════
    RESPONSIVIDADE
-═══════════════════════════════════════════ */
+═══════════════════════════════════════════════ */
 @media (min-width: 481px) {
   body {
-    border-left: 1px solid rgba(238,186,64,0.06);
-    border-right: 1px solid rgba(238,186,64,0.06);
+    border-left: 1px solid rgba(200,146,62,0.06);
+    border-right: 1px solid rgba(200,146,62,0.06);
   }
 }
 
 @media (max-height: 680px) {
-  .convite-conteudo {
-    padding-top: 24px;
-    padding-bottom: 100px;
-  }
-  .convite-tagline  { margin-bottom: 18px; }
-  .convite-data     { margin-bottom: 22px; }
-  .convite-anos     { margin-bottom: 18px; }
-  .cena-candelabro  { max-height: 220px; }
+  .convite-inner { padding-top: 24px; padding-bottom: 80px; }
+  .convite-tagline { margin-bottom: 14px; }
+  .convite-data-bloco { margin-bottom: 18px; }
 }
 
-/* ═══════════════════════════════════════════
+
+/* ═══════════════════════════════════════════════
    ACESSIBILIDADE — prefers-reduced-motion
-═══════════════════════════════════════════ */
+═══════════════════════════════════════════════ */
 @media (prefers-reduced-motion: reduce) {
-  .float-3, .float-4, .float-35,
-  .cena-candelabro--esq, .cena-candelabro--dir,
-  .petala,
+  .selo-container.idle,
+  .petala-ambiente,
   .nome-shimmer { animation: none !important; }
 
   .nome-shimmer {
-    background: var(--ouro);
-    -webkit-background-clip: text;
-    background-clip: text;
+    background: var(--ambar);
+    -webkit-background-clip: text; background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 
@@ -856,5 +797,5 @@ a { text-decoration: none; }
   }
 
   .toast { transition: opacity 0.1s; }
-  #transition-overlay { transition: opacity 0.1s; }
+  #overlay-transicao { transition: opacity 0.1s; }
 }

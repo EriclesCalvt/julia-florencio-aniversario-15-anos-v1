@@ -1,236 +1,279 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="theme-color" content="#01061c">
+  <meta name="theme-color" content="#11142B">
   <meta property="og:title" content="Júlia Florencio — 15 Anos 🌹">
-  <meta property="og:description"
-    content="Onde cada pétala guarda um segredo e a magia transforma a noite... · 08.08.2026 · 20h30">
-  <link rel="icon"
-    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌹</text></svg>">
+  <meta property="og:description" content="Um selo se abre. Uma noite encantada começa. · 08.08.2026 · 20h30">
   <title>Júlia Florencio · 15 Anos</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><path fill='%2357162A' d='M100,15 C140,12 175,40 182,80 C188,118 168,155 130,178 C95,198 55,190 28,162 C5,138 8,95 22,62 C38,28 68,18 100,15 Z'/><g transform='translate(100,82)'><ellipse cx='0' cy='-14' rx='9' ry='14' fill='%23F1E6CC' opacity='0.9'/><ellipse cx='0' cy='-14' rx='9' ry='14' fill='%23F1E6CC' opacity='0.9' transform='rotate(72)'/><ellipse cx='0' cy='-14' rx='9' ry='14' fill='%23F1E6CC' opacity='0.9' transform='rotate(144)'/><ellipse cx='0' cy='-14' rx='9' ry='14' fill='%23F1E6CC' opacity='0.9' transform='rotate(216)'/><ellipse cx='0' cy='-14' rx='9' ry='14' fill='%23F1E6CC' opacity='0.9' transform='rotate(288)'/><circle cx='0' cy='0' r='5' fill='%2357162A'/></g><text x='100' y='135' text-anchor='middle' font-size='24' fill='%23F1E6CC' font-family='serif'>XV</text></svg>">
   <link rel="stylesheet" href="css/styles.css">
 </head>
-
 <body>
 
+  <!-- Defs globais SVG — gradientes e filtros referenciados por todos os selos -->
+  <svg id="svg-global-defs" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+    <defs>
+      <radialGradient id="gradCera" cx="35%" cy="30%" r="75%">
+        <stop offset="0%"  stop-color="#7A2138"/>
+        <stop offset="55%" stop-color="#57162A"/>
+        <stop offset="100%" stop-color="#3A0F1C"/>
+      </radialGradient>
+      <filter id="relevoSelo" x="-30%" y="-30%" width="160%" height="160%">
+        <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000" flood-opacity="0.5"/>
+        <feDropShadow dx="0" dy="-1" stdDeviation="1" flood-color="#E0B36C" flood-opacity="0.3"/>
+      </filter>
+      <filter id="brilhoRachadura" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur stdDeviation="2.5" result="blur"/>
+        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+    </defs>
+  </svg>
+
   <!-- Overlay de transição fade-through-black -->
-  <div id="transition-overlay" aria-hidden="true"></div>
-  <!-- ═══════════════════════════════════════════
-       TELA 0 — OVERTURE (vídeo)
-  ═══════════════════════════════════════════ -->
-  <section data-screen="intro" class="active">
-    <div class="rose-wrap" id="rose-wrap" aria-hidden="true">
-      <div class="rose-intro"></div>
-    </div>
-    <video id="intro-video" src="assets/video/SAVE_THE_DATE.mp4" playsinline muted preload="auto">
-    </video>
-    <div class="progress-bar" id="progress-bar" aria-hidden="true"></div>
-    <button id="btn-pular" class="btn-pular" aria-label="Pular vídeo de abertura">↗ Pular</button>
-  </section>
-  <!-- ═══════════════════════════════════════════
-       TELA 1 — O CONVITE (principal)
-  ═══════════════════════════════════════════ -->
-  <section data-screen="convite">
-    <div class="convite-cena">
+  <div id="overlay-transicao" aria-hidden="true"></div>
 
-      <!-- Pétalas CSS (sem JS) -->
-      <div class="petala p1" aria-hidden="true"></div>
-      <div class="petala p2" aria-hidden="true"></div>
-      <div class="petala p3" aria-hidden="true"></div>
-      <div class="petala p4" aria-hidden="true"></div>
-      <div class="petala p5" aria-hidden="true"></div>
-      <div class="petala p6" aria-hidden="true"></div>
+  <!-- Toast de feedback -->
+  <div class="toast" id="toast" role="alert" aria-live="polite"></div>
 
-      <!-- Candelabros de cena -->
-      <img src="assets/img/CANDELABRO.png" class="cena-candelabro cena-candelabro--esq" alt="" aria-hidden="true">
-      <img src="assets/img/CANDELABRO.png" class="cena-candelabro cena-candelabro--dir" alt="" aria-hidden="true">
 
-      <!-- Decorativos de fundo -->
-      <img src="assets/img/BULE.png" class="cena-bule float-4" alt="" aria-hidden="true">
-      <img src="assets/img/RELOGIO.png" class="cena-relogio float-35" alt="" aria-hidden="true">
+  <!-- ═══════════════════════════════════════
+       TELA 0 — ABERTURA
+  ═══════════════════════════════════════ -->
+  <section data-screen="abertura" class="cena active">
+    <div class="abertura-centro">
 
-      <!-- Conteúdo central -->
-      <div class="convite-conteudo">
-
-        <div class="entrada e1">
-          <img src="assets/img/Monograma.png" class="convite-monograma" alt="Monograma Júlia Florencio">
-          <div class="linha-ornamental"></div>
-        </div>
-
-        <div class="entrada e2">
-          <h1 class="convite-nome nome-shimmer">Júlia Florencio</h1>
-          <p class="convite-anos">15 Anos</p>
-        </div>
-
-        <p class="convite-tagline entrada e3">
-          "Onde cada pétala guarda um segredo<br>e a magia transforma a noite..."
-        </p>
-
-        <div class="convite-data entrada e4">
-          <p class="data-numero">08</p>
-          <p class="data-mes-ano">AGOSTO &nbsp;·&nbsp; 2026</p>
-          <div class="data-divisor"></div>
-          <p class="data-dia-hora">SÁBADO &nbsp;·&nbsp; 20H30</p>
-        </div>
-
-        <nav class="menu-convite entrada e5" aria-label="Menu do convite">
-          <button class="menu-item" data-goto="local" aria-label="Ver local da festa">
-            <span class="menu-icone">◈</span>
-            <span class="menu-texto">Local da Festa</span>
-            <span class="menu-seta">→</span>
-          </button>
-          <button class="menu-item" data-goto="presenca" aria-label="Confirmar presença">
-            <span class="menu-icone">◈</span>
-            <span class="menu-texto">Confirmar Presença</span>
-            <span class="menu-seta">→</span>
-          </button>
-          <button class="menu-item" data-goto="presentes" aria-label="Sugestões de presente">
-            <span class="menu-icone">◈</span>
-            <span class="menu-texto">Sugestões de Presente</span>
-            <span class="menu-seta">→</span>
-          </button>
-          <button class="menu-item" data-goto="dresscode" aria-label="Ver dress code">
-            <span class="menu-icone">◈</span>
-            <span class="menu-texto">Dress Code</span>
-            <span class="menu-seta">→</span>
-          </button>
-        </nav>
-
+      <div class="selo-container interativo idle" id="selo-abertura"
+           role="button" tabindex="0" aria-label="Toque para abrir o convite">
+        <svg class="selo-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path class="selo-forma" fill="url(#gradCera)" filter="url(#relevoSelo)"
+            d="M100,15 C140,12 175,40 182,80 C188,118 168,155 130,178
+               C95,198 55,190 28,162 C5,138 8,95 22,62 C38,28 68,18 100,15 Z"/>
+          <g class="selo-rosa" transform="translate(100,82)">
+            <ellipse cx="0" cy="-14" rx="9" ry="14" fill="#F1E6CC" opacity="0.9"/>
+            <ellipse cx="0" cy="-14" rx="9" ry="14" fill="#F1E6CC" opacity="0.9" transform="rotate(72)"/>
+            <ellipse cx="0" cy="-14" rx="9" ry="14" fill="#F1E6CC" opacity="0.9" transform="rotate(144)"/>
+            <ellipse cx="0" cy="-14" rx="9" ry="14" fill="#F1E6CC" opacity="0.9" transform="rotate(216)"/>
+            <ellipse cx="0" cy="-14" rx="9" ry="14" fill="#F1E6CC" opacity="0.9" transform="rotate(288)"/>
+            <circle cx="0" cy="0" r="5" fill="#57162A"/>
+          </g>
+          <text class="selo-xv" x="100" y="135" text-anchor="middle"
+            font-family="Italiana, Georgia, serif" font-size="24" fill="#F1E6CC">XV</text>
+          <path class="selo-rachadura" filter="url(#brilhoRachadura)"
+            d="M100,18 L95,65 L106,98 L92,138 L100,182"
+            fill="none" stroke="#E0B36C" stroke-width="1.5"
+            stroke-dasharray="230" stroke-dashoffset="230"/>
+        </svg>
+        <!-- Pétalas de explosão — geradas por JS -->
       </div>
+
+      <p class="abertura-hint">toque para abrir</p>
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════════
-       TELA 2 — O CASTELO (Local da Festa)
-  ═══════════════════════════════════════════ -->
-  <section data-screen="local">
-    <div class="subpage-cena">
-      <header class="sub-header">
-        <button class="btn-voltar" onclick="navigate('convite')" aria-label="Voltar ao convite">
-          ← Voltar
+
+  <!-- ═══════════════════════════════════════
+       TELA 1 — CONVITE (principal)
+  ═══════════════════════════════════════ -->
+  <section data-screen="convite" class="cena">
+    <!-- Pétalas ambiente — geradas por JS -->
+
+    <div class="convite-inner">
+
+      <!-- Selo estático decorativo 64px -->
+      <div class="entrada" style="--delay:0.1s">
+        <svg class="selo-svg selo-convite" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path fill="url(#gradCera)" filter="url(#relevoSelo)"
+            d="M100,15 C140,12 175,40 182,80 C188,118 168,155 130,178
+               C95,198 55,190 28,162 C5,138 8,95 22,62 C38,28 68,18 100,15 Z"/>
+          <g transform="translate(100,82)">
+            <ellipse cx="0" cy="-14" rx="9" ry="14" fill="#F1E6CC" opacity="0.9"/>
+            <ellipse cx="0" cy="-14" rx="9" ry="14" fill="#F1E6CC" opacity="0.9" transform="rotate(72)"/>
+            <ellipse cx="0" cy="-14" rx="9" ry="14" fill="#F1E6CC" opacity="0.9" transform="rotate(144)"/>
+            <ellipse cx="0" cy="-14" rx="9" ry="14" fill="#F1E6CC" opacity="0.9" transform="rotate(216)"/>
+            <ellipse cx="0" cy="-14" rx="9" ry="14" fill="#F1E6CC" opacity="0.9" transform="rotate(288)"/>
+            <circle cx="0" cy="0" r="5" fill="#57162A"/>
+          </g>
+          <text x="100" y="135" text-anchor="middle"
+            font-family="Italiana, Georgia, serif" font-size="24" fill="#F1E6CC">XV</text>
+        </svg>
+      </div>
+
+      <div class="linha-dourada entrada" style="--delay:0.1s"></div>
+
+      <div class="entrada" style="--delay:0.25s">
+        <h1 class="nome-shimmer">Júlia Florencio</h1>
+        <p class="convite-xv-label">15 Anos</p>
+      </div>
+
+      <div class="convite-tagline entrada" style="--delay:0.4s">
+        <em>"Um selo se abre.<br>Uma noite encantada começa."</em>
+      </div>
+
+      <div class="convite-data-bloco entrada" style="--delay:0.55s">
+        <div class="data-numero">08</div>
+        <div class="data-mes">Agosto · 2026</div>
+        <div class="data-separador"></div>
+        <div class="data-hora">Sábado · 20h30</div>
+      </div>
+
+      <nav class="menu-convite entrada" style="--delay:0.7s" aria-label="Menu do convite">
+        <button class="menu-item" data-goto="local" aria-label="Ver local da festa">
+          <span class="menu-icone">◈</span>
+          <span class="menu-texto">Local da Festa</span>
+          <span class="menu-seta">→</span>
         </button>
-      </header>
-      <div class="sub-inner">
-        <img src="assets/img/CANDELABRO.png" class="local-candelabro" alt="" aria-hidden="true">
-        <p class="sub-label">Local da Festa</p>
-        <h2 class="sub-title">Garden Buffet</h2>
-        <div class="linha-ornamental linha-ornamental--sub"></div>
-        <p class="local-rua">Av. R. Benjamim Brasil, 570</p>
-        <p class="local-bairro">Maraponga &nbsp;·&nbsp; Fortaleza, CE</p>
-        <div class="mapa-wrap">
-          <iframe
-            src="https://maps.google.com/maps?q=Av.+R.+Benjamim+Brasil,+570,+Maraponga,+Fortaleza,+CE&output=embed"
-            title="Mapa Garden Buffet" loading="lazy" allowfullscreen>
-          </iframe>
+        <button class="menu-item" data-goto="presenca" aria-label="Confirmar presença">
+          <span class="menu-icone">◈</span>
+          <span class="menu-texto">Confirmar Presença</span>
+          <span class="menu-seta">→</span>
+        </button>
+        <button class="menu-item" data-goto="presentes" aria-label="Ver sugestões de presente">
+          <span class="menu-icone">◈</span>
+          <span class="menu-texto">Sugestões de Presente</span>
+          <span class="menu-seta">→</span>
+        </button>
+        <button class="menu-item" data-goto="dresscode" aria-label="Ver dress code">
+          <span class="menu-icone">◈</span>
+          <span class="menu-texto">Dress Code</span>
+          <span class="menu-seta">→</span>
+        </button>
+      </nav>
+
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════
+       TELA 2 — LOCAL DA FESTA
+  ═══════════════════════════════════════ -->
+  <section data-screen="local" class="cena cena--quente">
+    <header class="sub-header">
+      <!-- Selo miniatura 28px — injetado por JS -->
+      <button class="btn-voltar" onclick="navigate('convite')" aria-label="Voltar ao convite">← Voltar</button>
+    </header>
+    <div class="sub-content">
+      <p class="sub-label">Local da Festa</p>
+      <h2 class="sub-titulo">Garden Buffet</h2>
+      <div class="linha-dourada"></div>
+      <p class="local-ende">Av. R. Benjamim Brasil, 570</p>
+      <p class="local-bairro">Maraponga · Fortaleza, CE</p>
+      <div class="local-mapa">
+        <iframe
+          src="https://maps.google.com/maps?q=Av.+R.+Benjamim+Brasil,+570,+Maraponga,+Fortaleza,+CE&output=embed"
+          title="Garden Buffet no Google Maps"
+          loading="lazy"
+          allowfullscreen></iframe>
+      </div>
+      <a class="btn-outlined"
+         href="https://www.google.com/maps/search/?api=1&query=Av.+R.+Benjamim+Brasil,+570,+Maraponga,+Fortaleza,+CE"
+         target="_blank" rel="noopener noreferrer">
+        Abrir no Google Maps
+      </a>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════
+       TELA 3 — CONFIRMAR PRESENÇA
+  ═══════════════════════════════════════ -->
+  <section data-screen="presenca" class="cena">
+    <header class="sub-header">
+      <!-- Selo miniatura 28px — injetado por JS -->
+      <button class="btn-voltar" onclick="navigate('convite')" aria-label="Voltar ao convite">← Voltar</button>
+    </header>
+    <div class="sub-content">
+      <p class="sub-label">Confirmar Presença</p>
+      <h2 class="sub-titulo presenca-titulo">Sua presença é nossa<br>maior alegria</h2>
+      <div class="linha-dourada"></div>
+      <form class="form-presenca" onsubmit="return false;">
+        <div class="form-grupo">
+          <label class="form-label" for="inp-nome">Seu Nome</label>
+          <input class="form-input" type="text" id="inp-nome"
+                 placeholder="Como você se chama?" autocomplete="name" spellcheck="false">
         </div>
-        <a href="https://www.google.com/maps/search/?api=1&query=Av.+R.+Benjamim+Brasil,+570,+Maraponga,+Fortaleza,+CE"
-          target="_blank" rel="noopener noreferrer" class="btn-outlined">
-          Abrir no Google Maps
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════════
-       TELA 3 — A CONFIRMAÇÃO (Confirmar Presença)
-  ═══════════════════════════════════════════ -->
-  <section data-screen="presenca">
-    <div class="subpage-cena">
-      <header class="sub-header">
-        <button class="btn-voltar" onclick="navigate('convite')" aria-label="Voltar ao convite">
-          ← Voltar
-        </button>
-      </header>
-      <div class="sub-inner">
-        <p class="sub-label">Confirmar Presença</p>
-        <img src="assets/img/CHIP.png" class="sub-deco float-4" alt="" aria-hidden="true" loading="lazy">
-        <h2 class="sub-title">Sua presença é nossa<br>maior alegria</h2>
-        <div class="linha-ornamental linha-ornamental--sub"></div>
-        <form class="form-presenca" onsubmit="return false;">
-          <div class="form-group">
-            <label class="form-label" for="inp-nome">Seu nome</label>
-            <input type="text" id="inp-nome" class="form-input" autocomplete="name" spellcheck="false">
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="inp-tel">WhatsApp / Telefone</label>
-            <input type="tel" id="inp-tel" class="form-input" autocomplete="tel">
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="sel-qtd">Número de convidados</label>
-            <select id="sel-qtd" class="form-input form-select">
-              <option value="1">1 pessoa</option>
-              <option value="2">2 pessoas</option>
-              <option value="3">3 pessoas</option>
-              <option value="4">4 pessoas</option>
-              <option value="5+">5 ou mais</option>
-            </select>
-          </div>
-          <button type="button" class="btn-primario" onclick="confirmarPresenca()">
-            Confirmar Presença
-          </button>
-        </form>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════════
-       TELA 4 — OS TESOUROS (Sugestões de Presente)
-  ═══════════════════════════════════════════ -->
-  <section data-screen="presentes">
-    <div class="subpage-cena">
-      <header class="sub-header">
-        <button class="btn-voltar" onclick="navigate('convite')" aria-label="Voltar ao convite">
-          ← Voltar
-        </button>
-      </header>
-      <div class="sub-inner">
-        <img src="assets/img/BULE.png" class="presentes-bule float-4" alt="" aria-hidden="true" loading="lazy">
-        <p class="sub-label">Sugestões de Presente</p>
-        <h2 class="sub-title">Ideias que farão<br>Júlia sorrir</h2>
-        <div class="linha-ornamental linha-ornamental--sub"></div>
-        <ul class="presentes-lista" aria-label="Lista de sugestões de presente">
-          <li class="presente-item">Roupas P</li>
-          <li class="presente-item">Calçados 37</li>
-          <li class="presente-item">Maquiagens</li>
-          <li class="presente-item">Perfumes (fragrância florais)</li>
-          <li class="presente-item">Bolsas P</li>
-          <li class="presente-item">Acessórios (dourados)</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════════
-       TELA 5 — O TRAJE (Dress Code)
-  ═══════════════════════════════════════════ -->
-  <section data-screen="dresscode">
-    <div class="subpage-cena">
-      <header class="sub-header">
-        <button class="btn-voltar" onclick="navigate('convite')" aria-label="Voltar ao convite">
-          ← Voltar
-        </button>
-      </header>
-      <div class="sub-inner">
-        <p class="sub-label">Dress Code</p>
-        <img src="assets/img/RELOGIO.png" class="sub-deco dresscode-relogio float-4" alt="" aria-hidden="true"
-          loading="lazy">
-        <div class="linha-ornamental linha-ornamental--sub"></div>
-        <div class="dresscode-card">
-          <p class="dresscode-label-inner">Traje da noite</p>
-          <p class="dresscode-traje">Passeio Completo</p>
-          <p class="dresscode-desc">
-            Vista-se com elegância para uma noite encantada no castelo.
-          </p>
+        <div class="form-grupo">
+          <label class="form-label" for="inp-tel">WhatsApp / Telefone</label>
+          <input class="form-input" type="tel" id="inp-tel"
+                 placeholder="(85) 9 0000-0000" autocomplete="tel">
         </div>
-        <img src="assets/img/Julia_Florencio.png" class="dresscode-julia" alt="Júlia Florencio" loading="lazy">
+        <div class="form-grupo">
+          <label class="form-label" for="sel-qtd">Número de Convidados</label>
+          <select class="form-input form-select" id="sel-qtd">
+            <option value="1">1 pessoa</option>
+            <option value="2">2 pessoas</option>
+            <option value="3">3 pessoas</option>
+            <option value="4">4 pessoas</option>
+            <option value="5+">5 ou mais</option>
+          </select>
+        </div>
+        <button type="button" class="btn-cheio" onclick="confirmarPresenca()">
+          Confirmar Presença
+        </button>
+      </form>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════
+       TELA 4 — SUGESTÕES DE PRESENTE
+  ═══════════════════════════════════════ -->
+  <section data-screen="presentes" class="cena cena--quente">
+    <header class="sub-header">
+      <!-- Selo miniatura 28px — injetado por JS -->
+      <button class="btn-voltar" onclick="navigate('convite')" aria-label="Voltar ao convite">← Voltar</button>
+    </header>
+    <div class="sub-content">
+      <p class="sub-label">Sugestões de Presente</p>
+      <h2 class="sub-titulo">Ideias que farão<br>Júlia sorrir</h2>
+      <div class="linha-dourada"></div>
+      <ul class="lista-presentes" aria-label="Lista de sugestões de presente">
+        <li class="presente-item">Roupas P</li>
+        <li class="presente-item">Calçados 37</li>
+        <li class="presente-item">Maquiagens</li>
+        <li class="presente-item">Perfumes (fragrância florais)</li>
+        <li class="presente-item">Bolsas P</li>
+        <li class="presente-item">Acessórios (dourados)</li>
+      </ul>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════
+       TELA 5 — DRESS CODE
+  ═══════════════════════════════════════ -->
+  <section data-screen="dresscode" class="cena">
+    <header class="sub-header">
+      <!-- Selo miniatura 28px — injetado por JS -->
+      <button class="btn-voltar" onclick="navigate('convite')" aria-label="Voltar ao convite">← Voltar</button>
+    </header>
+    <div class="sub-content dresscode-content">
+      <p class="sub-label">Dress Code</p>
+
+      <!-- Foto como herói — destaque principal -->
+      <div class="dresscode-foto-wrap">
+        <img class="dresscode-foto" src="assets/img/Julia_Florencio.png"
+             alt="Júlia Florencio" loading="lazy">
+      </div>
+
+      <!-- Separador ornamental -->
+      <div class="dresscode-ornamento">
+        <span class="dresscode-orn-linha"></span>
+        <span class="dresscode-orn-icone">◈</span>
+        <span class="dresscode-orn-linha"></span>
+      </div>
+
+      <!-- Info tipográfica — aberta, sem caixa -->
+      <div class="dresscode-info">
+        <p class="dresscode-traje-label">Traje da noite</p>
+        <h2 class="dresscode-titulo">Passeio Completo</h2>
+        <em class="dresscode-desc">"Vista-se com elegância<br>para uma noite encantada."</em>
       </div>
     </div>
   </section>
+
 
   <script src="js/app.js"></script>
 </body>
-
 </html>
